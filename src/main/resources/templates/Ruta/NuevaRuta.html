@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Plantilla/plantillaPrincipal}">
+
+<head>
+	<meta charset="UTF-8">
+	<!--IE Compatibility modes-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!--Mobile first-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Insertar Ruta</title>
+
+<body>
+	<div layout:fragment="contenedor">
+		<div class="d-sm-flex align-items-center justify-content-between mb-4">
+			<h1 class="h3 mb-0 text-gray-800">Nueva Ruta</h1>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="./">Home</a></li>
+				<li class="breadcrumb-item">Pages</li>
+				<li class="breadcrumb-item active" aria-current="page">Blank Page</li>
+			</ol>
+		</div>
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							<p></p>
+							<form th:action="@{/guardarRuta}" th:object="${nuevaRuta}" method="post">
+								<div class="row mb-3">
+									<label for="puntoSalidaR" class="col-sm-2 col-form-label">Punto Salida</label>
+									<div class="col-sm-10">
+										<input type="text" th:field="*{puntoSalida}" class="form-control">
+									</div>
+								</div>
+								
+								<div class="row mb-3">
+									<label class="col-sm-2 col-form-label"></label>
+									<div class="col-sm-10">
+										<button type="submit" class="btn btn-primary">Guardar</button>
+									</div>
+								</div>
+								<input type="hidden" th:field="*{idRuta}">
+							</form><!-- End General Form Elements -->
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</section>
+
+		<!-- Modal Logout -->
+		<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to logout?</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+						<a href="login.html" class="btn btn-primary">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!---Container Fluid-->
+
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Plantilla/plantillaPrincipal}">
+
+<head>
+	<meta charset="UTF-8">
+	<!--IE Compatibility modes-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!--Mobile first-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>Listar Pedido</title>
+</head>
+
+<body>
+	<div layout:fragment="contenedor">
+
+
+		<div class="pagetitle">
+			<h1>Pedidos</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+					<li class="breadcrumb-item">Pages</li>
+					<li class="breadcrumb-item active">Blank</li>
+				</ol>
+			</nav>
+		</div><!-- End Page Title -->
+
+		<section class="section">
+			<div class="row">
+				<div class="col-lg-12">
+
+					<div class="card">
+						<div class="card-body">
+							
+							
+							<ul class="breadcrumb container">
+								<li><a style="color: red"
+									th:href="@{/nuevoPedido}">+ NUEVO PEDIDO</a></li>
+							</ul>
+							<ul class="breadcrumb container">
+							<li>
+									
+									<form action="/buscarPorFecha" method="post">
+										<label for="fechaInicio">Fecha Inicio:</label> <input type="date"
+											id="fechaInicio" name="fechaInicio" th:value="${fechaInicio}"
+											required> 
+											
+											<label for="fechaFin">Fecha Fin:</label> <input
+											type="date" id="fechaFin" name="fechaFin"
+											th:value="${fechaFin}" required>
+
+										<!-- Otros campos del formulario y botones aquí -->
+
+										<button type="submit">Buscar</button>
+									</form>
+								</li> &nbsp; &nbsp; &nbsp; &nbsp;
+								<li><a style="color: blue"
+									th:href="@{/verPedidos}">Buscar todos</a></li>
+							</ul>
+							<table class="table">
+								<thead>
+									<tr>
+										<th scope="col">Id Pedido</th>
+										<th scope="col">Cliente</th>
+										<th scope="col">Descripción Pedido</th>
+										<th scope="col">Fecha Pedido</th>
+										<th scope="col">Estado</th>
+										<th scope="col"></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="ped: ${listaPedidos}">
+										<td th:text="${ped.idPedido}"></td>
+										<td th:text="${ped.cliente.nombre}"></td>
+										<td th:text="${ped.descripcionPedido}"></td>
+										<td th:text="${ped.fechaPedido}"></td>
+										<td th:text="${ped.estado}"></td>
+									
+										
+										<td><a th:href="@{/editarPedido/} + ${ped.idPedido}"
+												class="btn btn-outline-primary btn-xs">
+												<i class="nav-icon fas fa-edit"></i>
+											</a> <a th:href="@{/eliminarPedido/} + ${ped.idPedido}"
+												class="btn btn-outline-danger btn-xs "
+												onclick="return confirm('¿Seguro que desea elimiar registro?');">
+												<i class="nav-icon fas fa-trash"></i>
+											</a></td>
+											
+									</tr>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</section>
+
+	</div>
+</body>
+
+</html>
