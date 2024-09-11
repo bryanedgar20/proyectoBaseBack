@@ -67,4 +67,10 @@ public class PedidoServiceImpl implements IPedidoservice{
 		        .collect(Collectors.toList());
 	}
 
+	@Override
+	public List<Pedido> listarPedidoPorClienteNombreFechas(Long idCliente, String descripcionPedido) {
+		// TODO Auto-generated method stub
+		return this.pedidoRepositorio.buscarPedidos(idCliente, descripcionPedido);
+	}
+
 }

@@ -22,4 +22,6 @@ public interface IPedidoservice {
 	public void eliminarPedido(int idPedido);
 	
 	public List<PedidoVO> listarPedidoVO();
+	
+	public List<Pedido> listarPedidoPorClienteNombreFechas(Long idCliente, String descripcionPedido);
 }

@@ -112,4 +112,36 @@ public class PedidosController {
 		servicePedido.eliminarPedido(idPedido);
 		return "redirect:/verPedidos";
 	}
+	
+	//=========================MOSTRAR PANTALLA DE MONITOR DE BUSQUEDAS
+	
+	@GetMapping("/monitor")
+    public String mostrarMonitorBusqueda(Model model) {
+        // Llenar el modelo con los clientes para los filtros
+        model.addAttribute("clientes", this.serviceCliente.listCliente());
+        return "Pedido/monitorBusqueda";
+    }
+	
+	
+	@GetMapping("/buscar")
+    public String buscarPedidos(
+            @RequestParam(required = false) Long cliente,
+            @RequestParam(required = false) String descripcion,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaDesde,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate fechaHasta,
+            Model model) {
+
+		
+		
+        // Obtener lista filtrada de pedidos
+        List<Pedido> pedidos = servicePedido.listarPedidoPorClienteNombreFechas(cliente,descripcion);
+        
+        // Llenar el modelo con los clientes y resultados
+        model.addAttribute("clientes", this.serviceCliente.listCliente());
+        model.addAttribute("descripcionSeleccionada", descripcion);
+        model.addAttribute("clienteSeleccionado", cliente);
+        model.addAttribute("pedidos", pedidos);
+        return "Pedido/monitorBusqueda";
+    }
+	
 }
